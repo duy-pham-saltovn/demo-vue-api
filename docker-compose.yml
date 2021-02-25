@@ -1,0 +1,102 @@
+version: "3.8"
+services:
+  # PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vue_web_api
+    restart: unless-stopped
+    tty: true
+    environment:
+      APP_NAME: DuyApi
+      APP_ENV: local
+      APP_KEY: base64:OcRyJ7zOMwZnKy2y5k5fWKFACT2hNJUNgUx4Z1D1thc=
+      APP_DEBUG: "true"
+      DEBUGBAR_ENABLED: "false"
+      APP_URL: https://localhost:8009
+      APP_URL_ADMIN: https://localhost:8009/admin
+      CDN_URL:
+
+      LOG_CHANNEL: stack
+      DB_CONNECTION: mysql
+      DB_HOST: vue_db_api
+      DB_PORT: 3306
+      DB_DATABASE: vue_db_api
+      DB_USERNAME: root
+      DB_PASSWORD: root
+
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: file
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: file
+      SESSION_LIFETIME: 120
+
+      REDIS_HOST: 127.0.0.1
+      REDIS_PASSWORD: null
+      REDIS_PORT: 6379
+      MAIL_DRIVER: mailgun
+      MAIL_HOST: smtp.mailgun.org
+      MAIL_PORT: 587
+
+      MAIL_USERNAME: null
+      MAIL_PASSWORD: null
+      MAIL_ENCRYPTION: null
+      MAIL_FROM_ADDRESS: admin@gmail.com
+      MAIL_FROM_NAME: null
+      MAILGUN_DOMAIN: null
+      MAILGUN_SECRET: null
+
+      FB_CLIENT_ID:
+      FB_CLIENT_SECRET:
+      FB_REDIRECT:
+
+      GOOGLE_CLOUD_PROJECT_ID:
+      GOOGLE_CLOUD_KEY_FILE:
+      GOOGLE_CLOUD_STORAGE_BUCKET:
+      GOOGLE_REDIRECT: https://localhost:3000/google/callback
+
+      GOOGLE_CLIENT_ID:
+      GOOGLE_CLIENT_SECRET:
+    working_dir: /var/www/vue
+    volumes:
+      - ./:/var/www/vue
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-backend
+  nginx:
+    image: nginx:alpine
+    container_name: vue_nginx_api
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8009:443"
+    volumes:
+      - ./:/var/www/vue
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/certs:/etc/nginx/certs
+    networks:
+      - app-backend
+  #MySQL Service
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: vue_db_api
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3889:3306"
+    environment:
+      MYSQL_DATABASE: vue_db_api
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+       - ./db:/var/lib/mysql
+       - ./mysql/mysql.cnf:/etc/mysql/mysql.cnf
+    networks:
+      - app-backend
+#Docker Networks
+networks:
+  app-backend:
+    driver: bridge

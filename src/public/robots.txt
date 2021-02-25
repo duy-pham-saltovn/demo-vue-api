@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://trendsvietnam.vn/sitemap/sitemap.xml

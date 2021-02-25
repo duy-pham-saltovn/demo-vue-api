@@ -1,0 +1,161 @@
+.d-flex {
+    display: flex;
+}
+
+.login {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.login-social .fb, .login-social .google {
+    width: 230px;
+    margin: 0 10px;
+    text-align: center;
+    font-size: 12px;
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.login-social .fb a, .login-social .google a {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 46px;
+    line-height: 40px;
+    text-decoration: none;
+}
+
+.login-social .fb span, .login-social .google span {
+    display: inline-block;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.login-social .fb img, .login-social .google img {
+    max-width: 100%;
+}
+
+.login-social .fb .icon, .login-social .google .icon {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+    line-height: 31px;
+}
+
+.login-social .login {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 13px 2px rgba(251, 251, 251, 0.09);
+    position: relative;
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2);
+    width: 100%;
+}
+
+.footer h2 {
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.footer h2 a {
+    color: #f13f57;
+    -webkit-transition: 0.5s all;
+    transition: 0.5s all;
+}
+
+.footer h2 a:hover {
+    color: #fff;
+    -webkit-transition: 0.5s all;
+    transition: 0.5s all;
+}
+
+@media (max-width: 800px) {
+    h1 {
+        font-size: 2.6em;
+    }
+
+    .login-social {
+        float: none;
+    }
+
+    .w3ls-social {
+        position: static;
+        margin-top: 5em;
+    }
+
+    .w3ls-social h2 {
+        left: 241px;
+    }
+}
+
+@media (max-width: 667px) {
+    .w3ls-social h2 {
+        left: 182px;
+    }
+}
+
+@media (max-width: 600px) {
+    .w3ls-social h2 {
+        left: 151px;
+    }
+
+    .footer h2 {
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.3em;
+    }
+
+    .login-social form {
+        padding: 7.5vw;
+    }
+
+    .footer h2 {
+        letter-spacing: 1px;
+    }
+
+    .w3ls-social h2 {
+        left: 91px;
+    }
+}
+
+@media (max-width: 414px) {
+    .w3ls-social h2 {
+        left: 52px;
+    }
+}
+
+@media (max-width: 320px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .login-social form {
+        padding: 25px 14px;
+    }
+
+    .w3ls-social h2 {
+        left: 10px;
+    }
+}
